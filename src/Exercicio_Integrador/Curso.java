@@ -7,20 +7,26 @@ public class Curso {
 
     private String nome;
     private Integer codigoDoCurso;
-    private ProfessorAdjunto profAdj;
-    private ProfessorTitular profTit;
-    List<Aluno> listaDeAlunos;
+    private ProfessorAdjunto profAdj = new ProfessorAdjunto();
+    private ProfessorTitular profTit = new ProfessorTitular();
+    List<Aluno> listadeAlunos = new ArrayList<>(0);
     private Integer vagas;
 
     public Curso() {
     }
 
-    public Curso(String nome, Integer codigoDoCurso, ProfessorAdjunto profAdj, ProfessorTitular profTit, List<Aluno> listaDeAlunos) {
+    public  Curso (String nome, Integer vagas, Integer codigoDoCurso)
+    {
+        this.nome = nome;
+        this.vagas = vagas;
+        this.codigoDoCurso = codigoDoCurso;
+    }
+    public Curso(String nome, Integer codigoDoCurso, ProfessorAdjunto profAdj, ProfessorTitular profTit, List<Aluno> listadeAlunos) {
         this.nome = nome;
         this.codigoDoCurso = codigoDoCurso;
         this.profAdj = profAdj;
         this.profTit = profTit;
-        this.listaDeAlunos = listaDeAlunos;
+        this.listadeAlunos = listadeAlunos;
     }
     public Integer getVagas() {
         return vagas;
@@ -61,23 +67,12 @@ public class Curso {
         this.profTit = profTit;
     }
 
-    public List<Aluno> getListaDeAlunos() {
-        return listaDeAlunos;
+    public List<Aluno> getlistadeAlunos() {
+        return listadeAlunos;
     }
 
-    public void setListaDeAlunos(List<Aluno> listaDeAlunos) {
-        this.listaDeAlunos = listaDeAlunos;
-    }
-
-    public boolean adicionarUmAluno (Aluno umAluno)
-    {
-        if(this.listaDeAlunos.size() < vagas){
-            this.listaDeAlunos.add(umAluno);}
-        return true;
-    }
-    public void excluirUmAluno (Aluno umAluno)
-    {
-     this.listaDeAlunos.remove(umAluno);
+    public void setlistadeAlunos(List<Aluno> listadeAlunos) {
+        this.listadeAlunos = listadeAlunos;
     }
 
 }

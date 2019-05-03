@@ -6,18 +6,16 @@ public class Matricula {
     Date dataDoDia = new Date();
     private Aluno aluno;
     private Curso curso;
-    private Date getDataDoDia;
 
     public Matricula() {
 
 
     }
 
-    public Matricula(Date dataDoDia, Aluno aluno, Curso curso, Date getDataDoDia) {
+    public Matricula(Date dataDoDia, Aluno aluno, Curso curso) {
         this.dataDoDia = dataDoDia;
         this.aluno = aluno;
         this.curso = curso;
-        this.getDataDoDia = getDataDoDia;
     }
 
     public Date getDataDoDia() {
@@ -44,11 +42,4 @@ public class Matricula {
         this.curso = curso;
     }
 
-    public Date getGetDataDoDia() {
-        return getDataDoDia;
-    }
-
-    public void setGetDataDoDia(Date getDataDoDia) {
-        this.getDataDoDia = getDataDoDia;
-    }
 }
