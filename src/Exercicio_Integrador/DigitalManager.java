@@ -76,18 +76,21 @@ public class DigitalManager {
         Scanner sc = new Scanner(System.in);
         int digitarN;
 
-        try{System.out.println("===============================\nBem vindo a Digital House!\n===============================" +
-                "\nEscolha as opções abaixo:\n\n(1) Registrar\n(2) Consultar\n(3) Editar \n(4) Excluir\n(5) Sair do programa");
+        try {
+            System.out.println("===============================\nBem vindo a Digital House!\n===============================" +
+                    "\nEscolha as opções abaixo:\n\n(1) Registrar\n(2) Consultar\n(3) Editar \n(4) Excluir\n(5) Sair do programa");
             digitarN = sc.nextInt();
-            while (digitarN<1 || digitarN>4)
-            {
+            while (digitarN < 1 || digitarN > 4) {
                 System.out.println("======================\nErro!!\n======================\nDigite uma opção válida!\n" +
                         "\n(1) Registrar\n(2) Consultar\n(3) Editar \n(4) Excluir\n(5) Sair do programa\n");
                 digitarN = sc.nextInt();
-            }}catch (Exception e){System.out.println("===============================\nErro!! Digite uma opção válida!\n===============================");digitarN = 0;}
+            }
+        } catch (Exception e) {
+            System.out.println("===============================\nErro!! Digite uma opção válida!\n===============================");
+            digitarN = 0;
+        }
 
-        if (digitarN == 0)
-        {
+        if (digitarN == 0) {
             Menu();
         }
         if (digitarN == 1) {
@@ -97,13 +100,11 @@ public class DigitalManager {
 
             menuConsultar();
         }
-        if (digitarN == 3)
-        {
+        if (digitarN == 3) {
             menuEditar();
         }
 
-        if (digitarN == 4)
-        {
+        if (digitarN == 4) {
             menuExcluir();
         }
         if (digitarN == 5) {
@@ -127,10 +128,13 @@ public class DigitalManager {
         System.out.println("Digitar nome do curso: ");
         digitarN = sc.next();
         curso.setNome(digitarN);
-        try{System.out.println("Digitar quantidade de vagas do curso: ");
-        digitarC = sc.nextInt();}catch (InputMismatchException e){
+        try {
+            System.out.println("Digitar quantidade de vagas do curso: ");
+            digitarC = sc.nextInt();
+        } catch (InputMismatchException e) {
             System.out.println("Erro! Digite Novamente");
-            registrarCurso(); digitarC = sc.nextInt();
+            registrarCurso();
+            digitarC = sc.nextInt();
         }
         curso.setNome(digitarN);
         curso.setVagas(digitarC);
@@ -141,7 +145,7 @@ public class DigitalManager {
     }
 
 
-    public void registrarAluno()  {
+    public void registrarAluno() {
         Aluno aluno = new Aluno();
         String digitarNome, digitarS;
         Scanner sc = new Scanner(System.in);
@@ -161,33 +165,36 @@ public class DigitalManager {
     }
 
     public void matricularAluno() {
-        int codigoDoAluno, codigoDoCurso, nA = 0 , nC = 0;
+        int codigoDoAluno, codigoDoCurso, nA = 0, nC = 0;
         Scanner sc = new Scanner(System.in);
 
-        try{System.out.println("Código do Curso:");
-        codigoDoCurso = sc.nextInt();} catch (Exception e)
-        {
+        try {
+            System.out.println("Código do Curso:");
+            codigoDoCurso = sc.nextInt();
+        } catch (Exception e) {
             System.out.println("Código inválido! Digite novamente");
-            codigoDoCurso = sc.nextInt(); matricularAluno();
+            codigoDoCurso = sc.nextInt();
+            matricularAluno();
         }
 
         for (int i = 0; i < listaDeCursos.size(); i++) {
-            if(listaDeCursos.get(i).getCodigoDoCurso() == codigoDoCurso)
-            {
-               nC = nC + 1;
+            if (listaDeCursos.get(i).getCodigoDoCurso() == codigoDoCurso) {
+                nC = nC + 1;
             }
+        }
 
-            if (nC > 0) {
-                try{System.out.println("Código do Aluno(a): ");
-                codigoDoAluno = sc.nextInt();}catch (Exception e)
-                {
+        if (nC > 0) {
+            for (int i = 0; i < listaDeCursos.size(); i++) {
+                try {
+                    System.out.println("Código do Aluno(a): ");
+                    codigoDoAluno = sc.nextInt();
+                } catch (Exception e) {
                     System.out.println("Código Inválido! Digite Novamente");
-                    codigoDoAluno = sc.nextInt(); matricularAluno();
+                    codigoDoAluno = sc.nextInt();
+                    matricularAluno();
                 }
-                for (int o = 0 ; o < listaDeAlunos.size();o++)
-                {
-                    if (listaDeAlunos.get(o).getCodigoDoAluno() == codigoDoAluno)
-                    {
+                for (int o = 0; o < listaDeAlunos.size(); o++) {
+                    if (listaDeAlunos.get(o).getCodigoDoAluno() == codigoDoAluno) {
                         nA = nA + 1;
                     }
                 }
@@ -212,13 +219,15 @@ public class DigitalManager {
                             System.out.println("==============================\nAluno(a) não encontrado.\n==============================\n");
                         }
                     }
-                }else {
-                    System.out.println("Aluno(a) não encotrado!");}
-            } else
-                {
-                System.out.println("==============================\nCurso não encontrado.\n==============================\n");
+                } else {
+                    System.out.println("Aluno(a) não encotrado!");
+                }
             }
+        } else{
+            System.out.println("==============================\nCurso não encontrado.\n==============================\n");
+
         }
+
         voltarMenuRegistrarSair();
     }
 
@@ -289,60 +298,66 @@ public class DigitalManager {
 
         for (int i = 0; i < listaDeCursos.size(); i++) {
 
-            if (listaDeCursos.get(i).getCodigoDoCurso() == codigoCurso)
-            {
-                nc  = nc  + 1;
+            if (listaDeCursos.get(i).getCodigoDoCurso() == codigoCurso) {
+                nc = nc + 1;
             }
-
+        }
             if (nc > 0) {
+                for (int r = 0 ; r < listaDeCursos.size();r++){
+                    if (listaDeCursos.get(r).getCodigoDoCurso() == codigoCurso) {
 
-                try{System.out.println("Código do Professor(a) Titular: ");
-                codigoProfessorT = sc.nextInt();}catch(Exception e)
-                {
-                    System.out.println("==============================\nErro !!!\n==============================\n"); alocarProfessores(); codigoProfessorT = 0;
-                }
-
-                try{System.out.println("Código do Professor(a) Adjunto: ");
-                codigoProfessorA = sc.nextInt(); }catch (Exception e)
-                {
-                    System.out.println("==============================\nErro Fatal! Digite novamente!\n==============================\n"); alocarProfessores(); codigoProfessorA = 0;
-                }
-                for (int z = 0;z<listaDeProfessores.size();z++)
-                {
-                    if (codigoProfessorT == listaDeProfessores.get(z).getCodigoDoProf())
-                    {
-                        n = n +1;
-                    }
-                    if (codigoProfessorA == listaDeProfessores.get(z).getCodigoDoProf())
-                    {
-                        n2 = n2 + 1;
-                    }
-                }
-                if (n > 0) {
-
-                    for (int x = 0; x < listaDeProfessores.size(); x++) {
-                        if (listaDeProfessores.get(x).getCodigoDoProf() == codigoProfessorT) {
-                            listaDeCursos.get(i).setProfTit((ProfessorTitular) listaDeProfessores.get(x));
-                            System.out.println("==============================\nProfessor(a) Titular Alocado!\n==============================\n");
+                        try {
+                            System.out.println("Código do Professor(a) Titular: ");
+                            codigoProfessorT = sc.nextInt();
+                        } catch (Exception e) {
+                            System.out.println("==============================\nErro !!!\n==============================\n");
+                            alocarProfessores();
+                            codigoProfessorT = 0;
                         }
-                    }
-                }else {
-                    System.out.println("==============================\nProfessor(a) titular não encontrado!\n==============================\n");}
 
-                if (n2 > 0){
-                    for (int y = 0 ; y < listaDeProfessores.size(); y++){
-                    if (listaDeProfessores.get(y).getCodigoDoProf() == codigoProfessorA) {
-                        listaDeCursos.get(i).setProfAdj((ProfessorAdjunto) listaDeProfessores.get(y));
-                        System.out.println("==============================\nProfessor(a) Ajunto Alocado!\n==============================\n");
+                        try {
+                            System.out.println("Código do Professor(a) Adjunto: ");
+                            codigoProfessorA = sc.nextInt();
+                        } catch (Exception e) {
+                            System.out.println("==============================\nErro Fatal! Digite novamente!\n==============================\n");
+                            alocarProfessores();
+                            codigoProfessorA = 0;
                         }
-                    }
-                }else {
-                    System.out.println("==============================\nProfessor(a) Adjunto não Encontrado.\n==============================\n");}
+                        for (int z = 0; z < listaDeProfessores.size(); z++) {
+                            if (codigoProfessorT == listaDeProfessores.get(z).getCodigoDoProf()) {
+                                n = n + 1;
+                            }
+                            if (codigoProfessorA == listaDeProfessores.get(z).getCodigoDoProf()) {
+                                n2 = n2 + 1;
+                            }
+                        }
+                        if (n > 0) {
 
+                            for (int x = 0; x < listaDeProfessores.size(); x++) {
+                                if (listaDeProfessores.get(x).getCodigoDoProf() == codigoProfessorT) {
+                                    listaDeCursos.get(r).setProfTit((ProfessorTitular) listaDeProfessores.get(x));
+                                    System.out.println("==============================\nProfessor(a) Titular Alocado!\n==============================\n");
+                                }
+                            }
+                        } else {
+                            System.out.println("==============================\nProfessor(a) titular não encontrado!\n==============================\n");
+                        }
+
+                        if (n2 > 0) {
+                            for (int y = 0; y < listaDeProfessores.size(); y++) {
+                                if (listaDeProfessores.get(y).getCodigoDoProf() == codigoProfessorA) {
+                                    listaDeCursos.get(r).setProfAdj((ProfessorAdjunto) listaDeProfessores.get(y));
+                                    System.out.println("==============================\nProfessor(a) Ajunto Alocado!\n==============================\n");
+                                }
+                            }
+                        } else {
+                            System.out.println("==============================\nProfessor(a) Adjunto não Encontrado.\n==============================\n");
+                        }
+                    }}
             }else{
                 System.out.println("==============================\nCurso não encontrado.\n==============================\n");
             }
-        }
+
         voltarMenuRegistrarSair();
     }
 
@@ -794,9 +809,8 @@ public class DigitalManager {
 
             if(nC > 0)
             {
-                System.out.println("==============================\nEditar Parâmetros\n==============================\n");
-                System.out.println("==============================r" +
-                        "\n(1) Editar Nome\n(2) Editar Vagas\n(3) Voltar ao Menu\n(4) Sair do Programa\n==============================\n");
+                System.out.println("==============================\nEditar Parâmetros\n==============================\n" +
+                        "(1) Editar Nome\n(2) Editar Vagas\n(3) Voltar ao Menu\n(4) Sair do Programa\n==============================\n");
 
                 try{digitar = sc.nextInt();
                 while (digitar <1 || digitar>3)
@@ -1050,7 +1064,9 @@ public class DigitalManager {
     }
     public void editarMatricula() {
         Scanner sc = new Scanner(System.in);
-        int codigo, digitar, nC = 0;
+        int codigo, digitar, nC = 0, codigoCurso, nCurso = 0;
+        String cursoAntigo = "";
+        Curso novoCurso = new Curso();
 
         try {
             System.out.println("============================\nDigitar Código do Aluno(a): ");
@@ -1067,7 +1083,7 @@ public class DigitalManager {
 
             if (nC > 0) {
                 System.out.println("==============================\nEditar Parâmetros\n==============================\n");
-                System.out.println("==============================r" +
+                System.out.println("==============================" +
                         "\n(1) Editar Curso de Matrícula\n(2) Voltar ao Menu\n(3) Sair do Programa\n==============================\n");
 
                 try {
@@ -1088,9 +1104,7 @@ public class DigitalManager {
 
                     for (int x = 0; x < listaDeMatriculas.size(); x++) {
                         if (listaDeMatriculas.get(x).getAluno().getCodigoDoAluno() == codigo) {
-                            int codigoCurso, nCurso = 0;
-                            String cursoAntigo;
-                            Curso novoCurso = new Curso();
+
 
                             System.out.println("Novo curso: ");
                             codigoCurso = sc.nextInt();
@@ -1102,20 +1116,22 @@ public class DigitalManager {
                                 }
                                 if (nCurso > 0) {
                                     for (int y = 0; y < listaDeCursos.size(); y++) {
+                                        if (listaDeCursos.get(y).getCodigoDoCurso() == codigoCurso)
                                         novoCurso = listaDeCursos.get(y);
                                     }
                                 } else {
                                     System.out.println("==============================\nCurso não encontrado!\n==============================\n");
                                 }
-
-                                cursoAntigo = listaDeMatriculas.get(x).getCurso().getNome();
-                                listaDeMatriculas.get(x).setCurso(novoCurso);
-                                System.out.println("\n==============================\nNome alterado de " + cursoAntigo +
-                                        " para " + novoCurso.getNome() + "\n==============================");
                             }
+
+                            cursoAntigo = listaDeMatriculas.get(x).getCurso().getNome();
+                            listaDeMatriculas.get(x).setCurso(novoCurso);
+
                         }
 
-                    }
+                    }System.out.println("\n==============================\nNome alterado de " + cursoAntigo +
+                            " para " + novoCurso.getNome() + "\n==============================");
+
 
                 }
                 if (digitar == 2)
